@@ -75,8 +75,8 @@ GIT
 
 GIT
   remote: https://github.com/18f/identity-telephony.git
-  revision: f75e4a0b6e186b75a6cb6fb2dafc52323034e7b2
-  branch: mitchellhenke/testing-timeouts
+  revision: 5e552914bb0bbd64c3e49632464ff8b32c6b585e
+  branch: mitchellhenke/lg-3925-pinpoint-timeouts
   specs:
     identity-telephony (0.1.7)
       aws-sdk-pinpoint

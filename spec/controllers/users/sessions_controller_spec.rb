@@ -207,6 +207,14 @@ describe Users::SessionsController, devise: true do
       post :create, params: { user: { email: user.email.upcase, password: 'invalid_password' } }
     end
 
+    it 'does not digest submitted password' do
+      user = create(:user, :signed_up)
+
+      allow_any_instance_of(User).to receive(:encrypted_password_digest=).exactly(0)
+
+      post :create, params: { user: { email: user.email.upcase, password: 'invalid_password' } }
+    end
+
     it 'tracks the authentication attempt for nonexistent user' do
       stub_analytics
       analytics_hash = {

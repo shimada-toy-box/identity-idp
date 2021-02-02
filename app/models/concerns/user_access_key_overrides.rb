@@ -57,6 +57,7 @@ module UserAccessKeyOverrides
     return unless Encryption::PasswordVerifier.new.stale_digest?(
       encrypted_password_digest,
     )
+    digest_password!(password)
     update!(password: password)
   end
 

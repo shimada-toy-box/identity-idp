@@ -18,13 +18,17 @@ module UserAccessKeyOverrides
     result
   end
 
-  def password=(new_password)
-    @password = new_password
-    return if @password.blank?
+  def digest_password!(new_password = nil)
+    password = new_password || @password
+    raise 'blank password' if password.blank?
     self.encrypted_password_digest = Encryption::PasswordVerifier.new.digest(
-      password: @password,
+      password: password,
       user_uuid: uuid || generate_uuid,
     )
+  end
+
+  def password=(new_password)
+    @password = new_password
   end
 
   def valid_personal_key?(normalized_personal_key)

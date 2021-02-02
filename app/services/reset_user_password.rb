@@ -16,7 +16,7 @@ class ResetUserPassword
   attr_reader :user, :remember_device_revoked_at
 
   def reset_user_password
-    user.update!(password: SecureRandom.hex(8))
+    UpdateUser.new(user: user, attributes: { password: SecureRandom.hex(8) }).call
   end
 
   def forget_all_browsers

@@ -5,6 +5,10 @@ class UpdateUser
   end
 
   def call
+    if attributes[:password].present?
+      user.digest_password!(attributes[:password])
+    end
+
     result = user.update!(attributes.except(:phone_id, :phone, :phone_confirmed_at,
                                             :otp_make_default_number))
     manage_phone_configuration

@@ -9,7 +9,6 @@ module Users
 
     skip_before_action :session_expires_at, only: %i[active keepalive]
     skip_before_action :require_no_authentication, only: [:new]
-    before_action :configure_permitted_parameters, only: [:new]
     before_action :store_sp_metadata_in_session, only: [:new]
     before_action :check_user_needs_redirect, only: [:new]
     before_action :apply_secure_headers_override, only: [:new]
@@ -92,12 +91,6 @@ module Users
 
     def auth_params
       params.require(:user).permit(:email, :password, :request_id)
-    end
-
-    # Override Devise's sign_in_params to exclude :password and avoid setting
-    # the password attribute on the User class and digesting the password
-    def configure_permitted_parameters
-      devise_parameter_sanitizer.permit(:sign_in, except: [:password])
     end
 
     def process_locked_out_user

@@ -2,7 +2,7 @@ FactoryBot.define do
   Faker::Config.locale = :en
 
   factory :user do
-    after(:build) { |user| user.digest_password! if user.password }
+    after(:build, :stub) { |user| user.digest_password! if user.password }
     password { '!1a Z@6s' * 16 } # Maximum length password.
 
     transient do

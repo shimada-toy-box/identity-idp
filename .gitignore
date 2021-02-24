@@ -80,3 +80,8 @@ saml_*.key
 yarn-debug.log*
 yarn-error.log*
 .yarn-integrity
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

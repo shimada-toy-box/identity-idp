@@ -54,8 +54,8 @@ RUN export saml_endpoint_configs='[{"suffix":"2019","secret_key_passphrase":"tru
 # error An unexpected error occurred: "EACCES: permission denied, unlink '/srv/idp/current/node_modules/.yarn-integrity'".
 # Precompile assets
 RUN chown -R websrv /srv/idp
-RUN su - websrv -c "ls $WORKDIR"
-RUN su - websrv -c "cd $WORKDIR && bundle exec rake assets:precompile"
+RUN su - websrv -c "ls /srv/idp/current"
+RUN su - websrv -c "cd /srv/idp/current && bundle exec rake assets:precompile"
 
 # Download GeoIP datbase
 #RUN mkdir ${INSTALL_DIR}/geo_data

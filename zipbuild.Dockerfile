@@ -44,18 +44,20 @@ RUN touch log/newrelic_agent.log && chmod 777 log/newrelic_agent.log
 RUN touch /srv/idp/current/yarn-error.log && chmod 777 /srv/idp/current/yarn-error.log
 RUN touch /srv/idp/current/node_modules/.yarn-integrity && chmod 777 /srv/idp/current/node_modules/.yarn-integrity
 
-ENV RAILS_ENV=production
-ENV piv_cac_verify_token_url="https://foo"
-ENV secret_key_base=foo
-ENV saml_endpoint_configs='[{"suffix":"2019","secret_key_passphrase":"trust-but-verify"},{"suffix":"2018","secret_key_passphrase":"asdf1234"},{"suffix":"2020","secret_key_passphrase":"trust-but-verify"}]'
 
 # Current error
 # info "fsevents@1.2.13" is an optional dependency and failed compatibility check. Excluding it from installation.
 # error An unexpected error occurred: "EACCES: permission denied, unlink '/srv/idp/current/node_modules/.yarn-integrity'".
 # Precompile assets
 RUN chown -R websrv /srv/idp
-RUN su - websrv -c "ls /srv/idp/current"
-RUN su - websrv -c "cd /srv/idp/current && bundle exec rake assets:precompile"
+
+USER websrv
+ENV RAILS_ENV=production
+ENV piv_cac_verify_token_url="https://foo"
+ENV secret_key_base=foo
+ENV saml_endpoint_configs='[{"suffix":"2019","secret_key_passphrase":"trust-but-verify"},{"suffix":"2018","secret_key_passphrase":"asdf1234"},{"suffix":"2020","secret_key_passphrase":"trust-but-verify"}]'
+#RUN su - websrv -c "cd /srv/idp/current && bundle exec rake assets:precompile"
+RUN "cd /srv/idp/current && bundle exec rake assets:precompile"
 
 # Download GeoIP datbase
 #RUN mkdir ${INSTALL_DIR}/geo_data

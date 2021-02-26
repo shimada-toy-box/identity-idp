@@ -32,12 +32,16 @@ RUN NODE_ENV=production yarn install --force \
 RUN adduser websrv
 
 RUN ln -s /srv/idp/current/config/application.yml.default /srv/idp/current/config/application.yml
+RUN ln -s /srv/idp/current/config/service_providers.localdev.yml /srv/idp/current/config/service_providers.yml
+RUN ln -s /srv/idp/current/config/agencies.localdev.yml /srv/idp/current/config/agencies.yml
+RUN ln -s keys.example keys
+RUN ln -s certs.example certs
 RUN mkdir log
 RUN touch log/telephony.log && chmod 777 log/telephony.log
 RUN touch log/development.log && chmod 777 log/development.log
 
 # Precompile assets
-#RUN chown -R websrv /srv/idp/current
+#RUN chown -R websrv /srv/idp
 #RUN su - websrv -c "ls $WORKDIR"
 #RUN su - websrv -c "cd $WORKDIR && bundle exec rake assets:precompile"
 

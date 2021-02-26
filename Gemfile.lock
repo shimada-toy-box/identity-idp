@@ -760,6 +760,7 @@ DEPENDENCIES
   identity-idp-functions!
   identity-telephony!
   identity_validations!
+  io-console
   irb
   json-jwt (>= 1.11.0)
   jwt

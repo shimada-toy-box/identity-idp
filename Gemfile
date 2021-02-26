@@ -5,6 +5,8 @@ ruby '~> 2.6.5'
 
 gem 'rails', '~> 6.1.2'
 
+gem 'io-console'
+
 gem 'ahoy_matey', '~> 3.0'
 gem 'american_date'
 gem 'autoprefixer-rails', '~> 10.0'

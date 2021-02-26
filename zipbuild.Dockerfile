@@ -28,18 +28,28 @@ COPY package.json yarn.lock ./
 RUN NODE_ENV=production yarn install --force \
     && bundle exec yarn install
 
+# Doesn't necessarily have to be this user.  Just cannot be root
+RUN adduser websrv
+
+RUN ln -s /srv/idp/current/config/application.yml.default /srv/idp/current/config/application.yml
+RUN mkdir log
+RUN touch log/telephony.log && chmod 777 log/telephony.log
+RUN touch log/development.log && chmod 777 log/development.log
+
 # Precompile assets
-RUN bundle exec rake assets:precompile
+#RUN chown -R websrv /srv/idp/current
+#RUN su - websrv -c "ls $WORKDIR"
+#RUN su - websrv -c "cd $WORKDIR && bundle exec rake assets:precompile"
 
 # Download GeoIP datbase
-RUN mkdir ${INSTALL_DIR}/geo_data
-COPY GeoIP2-City.mmdb ${INSTALL_DIR}/geo_data/GeoLite2-City.mmdb
+#RUN mkdir ${INSTALL_DIR}/geo_data
+#COPY GeoIP2-City.mmdb ${INSTALL_DIR}/geo_data/GeoLite2-City.mmdb
 
 # Download hacked password database
 RUN mkdir -p ${INSTALL_DIR}/pwned_passwords && touch ${INSTALL_DIR}/pwned_passwords/pwned_passwords.txt
 
 # Clone identity-idp-confg
-RUN git clone git@github.com:18F/identity-idp-config.git ${INSTALL_DIR}/identity-idp-config
+#RUN git clone git@github.com:18F/identity-idp-config.git ${INSTALL_DIR}/identity-idp-config
 
 # Entrypoint for debugging
-CMD [/bin/sh]
+CMD [bash]

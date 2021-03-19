@@ -14,7 +14,7 @@ module Idv
     end
 
     def submit
-      Idv::DocAuthFormResponse.new(
+      FormResponse.new(
         success: valid?,
         errors: errors.messages,
       )
@@ -27,10 +27,8 @@ module Idv
         errors.add(:pii, generic_error)
       elsif !name_valid?
         errors.add(:pii, name_error)
-      elsif dob.blank?
+      elsif !dob_valid?
         errors.add(:pii, dob_error)
-      elsif !dob_meets_min_age?
-        errors.add(:pii, dob_min_age_error)
       elsif !state_valid?
         errors.add(:pii, generic_error)
       end
@@ -41,15 +39,7 @@ module Idv
     end
 
     def dob_valid?
-      dob.present? && dob_meets_min_age?
-    end
-
-    def dob_meets_min_age?
-      dob_date = Date.parse(dob)
-      today = Time.zone.today
-      age = today.year - dob_date.year - ((today.month > dob_date.month ||
-        (today.month == dob_date.month && today.day >= dob_date.day)) ? 0 : 1)
-      age >= AppConfig.env.idv_min_age_years.to_i
+      dob.present?
     end
 
     def state_valid?
@@ -70,10 +60,6 @@ module Idv
 
     def dob_error
       I18n.t('doc_auth.errors.lexis_nexis.birth_date_checks')
-    end
-
-    def dob_min_age_error
-      I18n.t('doc_auth.errors.lexis_nexis.birth_date_min_age')
     end
   end
 end

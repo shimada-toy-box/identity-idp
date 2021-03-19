@@ -1,7 +1,8 @@
 class ImageUploadResponsePresenter
   include Rails.application.routes.url_helpers
 
-  def initialize(form_response:, url_options: )
+  def initialize(form:, form_response:, url_options: )
+    @form = form
     @form_response = form_response
     @url_options = url_options
   end
@@ -17,7 +18,7 @@ class ImageUploadResponsePresenter
   end
 
   def remaining_attempts
-    @form_response.to_h[:remaining_attempts]
+    @form.remaining_attempts
   end
 
   def status

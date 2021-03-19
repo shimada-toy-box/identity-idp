@@ -1,9 +1,10 @@
 GIT
   remote: https://github.com/18F/identity-aamva-api-client-gem.git
-  revision: c7141277eabf96b011771e6ce5a1169b874cc905
-  tag: v4.1.0
+  revision: bdb925440c64138acd54a1658e5cc92323734a77
+  tag: v4.0.0
   specs:
-    aamva (4.1.0)
+    aamva (4.0.0)
+      dotenv
       faraday
       hashie
       proofer (>= 2.7.1)
@@ -41,10 +42,10 @@ GIT
 
 GIT
   remote: https://github.com/18F/identity-lexisnexis-api-client-gem.git
-  revision: d6e73358ab899e8740e0008aff0e03e26bd4eb56
-  tag: v3.1.0
+  revision: aa91ae06cb0ad0a810074eec5c7eba2762946d9b
+  tag: v3.0.0
   specs:
-    lexisnexis (3.1.0)
+    lexisnexis (3.0.0)
       activesupport
       faraday
 
@@ -291,6 +292,7 @@ GEM
       warden (~> 1.2.3)
     diff-lcs (1.4.4)
     docile (1.1.5)
+    dotenv (2.7.6)
     dotiw (5.1.0)
       activesupport
       i18n

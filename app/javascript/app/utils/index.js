@@ -4,6 +4,9 @@ import msFormatter from './ms-formatter';
 
 window.LoginGov = window.LoginGov || {};
 const { LoginGov } = window;
+const { documentElement } = window.document;
+
+documentElement.className = documentElement.className.replace(/no-js/, '');
 
 LoginGov.autoLogout = autoLogout;
 LoginGov.countdownTimer = countdownTimer;

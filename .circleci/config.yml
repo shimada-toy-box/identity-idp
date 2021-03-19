@@ -295,7 +295,7 @@ workflows:
   smoketest-dev-workflow:
     triggers:
       - schedule:
-          cron: "55 * * * *"
+          cron: "0 * * * *"
           filters:
             branches:
               only:
@@ -307,7 +307,7 @@ workflows:
   smoketest-int-workflow:
     triggers:
       - schedule:
-          cron: "45 * * * *"
+          cron: "10 * * * *"
           filters:
             branches:
               only:
@@ -319,7 +319,7 @@ workflows:
   smoketest-staging-workflow:
     triggers:
       - schedule:
-          cron: "35 * * * *"
+          cron: "20 * * * *"
           filters:
             branches:
               only:
@@ -331,7 +331,7 @@ workflows:
   smoketest-prod-workflow:
     triggers:
       - schedule:
-          cron: "25 * * * *"
+          cron: "30 * * * *"
           filters:
             branches:
               only:

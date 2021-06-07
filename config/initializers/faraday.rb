@@ -8,6 +8,7 @@ ActiveSupport::Notifications.subscribe('request.faraday') do |name, starts, ends
     path: url.path,
     duration_ms: duration_seconds * 1000,
     status: env.status,
+    service: "#{http_method} #{url.host}#{url.path}"
   }
   Rails.logger.info(
     metadata.to_json

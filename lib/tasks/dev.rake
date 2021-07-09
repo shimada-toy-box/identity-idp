@@ -110,6 +110,7 @@ namespace :dev do
   # rubocop:disable all
   def setup_user(user, args)
     user.encrypted_email = args[:ee].encrypted
+    user.terms_accepted_at = Time.zone.now
     user.reset_password(args[:pw], args[:pw])
     MfaContext.new(user).phone_configurations.create(phone_configuration_data(user, args))
     Event.create(user_id: user.id, event_type: :account_created)
@@ -130,7 +131,7 @@ namespace :dev do
   def phone_configuration_data(user, args)
     {
       delivery_preference: user.otp_delivery_preference,
-      phone: format('+1 (415) 555-%04d', args[:num]),
+      phone: format('+1 (415) 555-%04d', args[:num] % 10_000),
       confirmed_at: Time.zone.now,
     }
   end

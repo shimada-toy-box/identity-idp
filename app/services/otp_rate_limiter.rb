@@ -34,7 +34,7 @@ class OtpRateLimiter
 
   def increment
     # DO NOT MEMOIZE
-    @entry = OtpRequestsTracker.atomic_increment(entry_for_current_phone.id)
+    @entry = OtpRequestsTracker.atomic_increment!(entry_for_current_phone)
   end
 
   private

@@ -50,27 +50,29 @@ describe OtpRequestsTracker do
     end
   end
 
-  describe '.atomic_increment' do
+  describe '.atomic_increment!' do
     it 'updates otp_last_sent_at' do
+      last_sent_at = Time.zone.now - 1.hour
       old_ort = OtpRequestsTracker.create(
         phone_fingerprint: phone_fingerprint,
         otp_send_count: 3,
         phone_confirmed: true,
-        otp_last_sent_at: Time.zone.now - 1.hour,
+        otp_last_sent_at: last_sent_at,
       )
-      new_ort = OtpRequestsTracker.atomic_increment(old_ort.id)
-      expect(new_ort.otp_last_sent_at).to be > old_ort.otp_last_sent_at
+      new_ort = OtpRequestsTracker.atomic_increment!(old_ort)
+      expect(new_ort.otp_last_sent_at).to be > last_sent_at
     end
 
     it 'increments the otp_send_count' do
+      otp_send_count = 3
       old_ort = OtpRequestsTracker.create(
         phone_fingerprint: phone_fingerprint,
-        otp_send_count: 3,
+        otp_send_count: otp_send_count,
         phone_confirmed: true,
         otp_last_sent_at: Time.zone.now,
       )
-      new_ort = OtpRequestsTracker.atomic_increment(old_ort.id)
-      expect(new_ort.otp_send_count - 1).to eq(old_ort.otp_send_count)
+      new_ort = OtpRequestsTracker.atomic_increment!(old_ort)
+      expect(new_ort.otp_send_count - 1).to eq(otp_send_count)
     end
   end
 end

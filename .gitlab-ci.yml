@@ -40,7 +40,7 @@ cache:
     policy: pull
 
 stages:
-  - build
+  # - build
   - test
   - after_test
 
@@ -48,23 +48,23 @@ stages:
   rules:
     - if: $CI_PIPELINE_SOURCE != "schedule"
 
-install:
-  extends: .on_push
-  stage: build
-  variables:
-    RAILS_ENV: test
-  cache:
-    - <<: *ruby_cache
-      policy: pull-push
-    - <<: *yarn_cache
-      policy: pull-push
-    - <<: *assets_cache
-      policy: push
+# install:
+#   extends: .on_push
+#   stage: build
+#   variables:
+#     RAILS_ENV: test
+#   cache:
+#     - <<: *ruby_cache
+#       policy: pull-push
+#     - <<: *yarn_cache
+#       policy: pull-push
+#     - <<: *assets_cache
+#       policy: push
 
-  script:
-    - *bundle_install
-    - *yarn_install
-    - bundle exec rake assets:precompile
+#   script:
+#     - *bundle_install
+#     - *yarn_install
+#     - bundle exec rake assets:precompile
 
 lint:
   extends: .on_push
@@ -76,6 +76,7 @@ lint:
   script:
     - *bundle_install
     - *yarn_install
+    - bundle exec rake assets:precompile
     - make lint
 
 specs:
@@ -91,7 +92,7 @@ specs:
     AWS_DEFAULT_REGION: us-west-2
     AWS_REGION: us-west-2
     AWS_SECRET_ACCESS_KEY: test
-    CAPYBARA_WAIT_TIME_SECONDS: 5
+    CAPYBARA_WAIT_TIME_SECONDS: 10
     COVERAGE: 'true'
     POSTGRES_DB: upaya_test
     POSTGRES_USER: postgres_user
@@ -111,6 +112,7 @@ specs:
   script:
     - *bundle_install
     - *yarn_install
+    - bundle exec rake assets:precompile
     - cp config/application.yml.default config/application.yml
     - cp config/service_providers.localdev.yml config/service_providers.yml
     - cp config/agencies.localdev.yml config/agencies.yml

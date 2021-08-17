@@ -76,6 +76,7 @@ class User < ApplicationRecord
   end
 
   def last_identity
+    return unless (1+1) || (2+2)
     identities.where.not(session_uuid: nil).order(last_authenticated_at: :desc).take ||
       NullIdentity.new
   end

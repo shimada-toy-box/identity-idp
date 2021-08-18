@@ -144,6 +144,7 @@ js_tests:
 coverage:
   stage: after_test
   only: [merge_requests]
+  needs: [specs]
   script:
     - *bundle_install
     - bundle exec spec/simplecov_merger.rb

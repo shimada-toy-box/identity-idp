@@ -48,7 +48,7 @@ en:
         before continuing. We sent you a link with instructions.
       quota_reached: Sorry your service provider has reached its identity verification
         limit.  Please contact your service provider for more information.
-      send_link_throttle: You tried too many times, please try again in 10 minutes.
+      send_link_throttle: You tried too many times, please try again in %{timeout}.
         You can also click on Start Over and choose to use your computer
         instead.
       throttled_heading: We could not verify your ID
@@ -93,6 +93,8 @@ en:
         an authenticator. Please use a different phone number.
       phone_unsupported: Sorry, we are unable to send SMS at this time. Please try the
         phone call option below, or use your personal key.
+      premium_rate_phone: This number has a toll connected to it. Please select a
+        different number and try again.
       pwned_password: The password you entered is not safe. It’s in a list of known
         passwords exposed in data breaches.
       try_again: Please try again.
@@ -114,9 +116,9 @@ en:
     two_factor_auth_setup:
       must_select_option: Select an authentication method.
     verify_personal_key:
-      throttled: You tried too many times, please try again in 15 minutes.
+      throttled: You tried too many times, please try again in %{timeout}.
     verify_profile:
-      throttled: You tried too many times, please try again in 10 minutes.
+      throttled: You tried too many times, please try again in %{timeout}.
     webauthn_setup:
       already_registered: Security key already registered. Please try a different security key.
       attestation_error: Sorry, but your security key doesn’t appear to be a FIDO

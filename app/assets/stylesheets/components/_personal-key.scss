@@ -9,22 +9,17 @@
   width: 60px;
 }
 
-.separator-text > div {
-  font-size: 1.5rem;
-
-  &::after {
-    color: $silver;
-    content: '-';
-    padding: 0 .25rem;
+.separator-text {
+  .separator-text__code {
+    font-size:1.5rem;
   }
-
   > div {
     &::after {
       color: $silver;
       content: '-';
       padding: 0 .25rem;
     }
-
+  
     &:last-child::after {
       content: none;
       padding: 0;

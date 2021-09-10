@@ -9,9 +9,13 @@
   width: 60px;
 }
 
-.separator-text {
-  .separator-text__code {
-    font-size: 1.5rem;
+.separator-text > div {
+  font-size: 1.5rem;
+
+  &::after {
+    color: $silver;
+    content: '-';
+    padding: 0 .25rem;
   }
 
   > div {
